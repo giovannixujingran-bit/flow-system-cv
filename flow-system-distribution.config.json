@@ -1,0 +1,22 @@
+{
+  "github": {
+    "repo": "giovannixujingran-bit/flow-system",
+    "ref": "main"
+  },
+  "install": {
+    "path": "%USERPROFILE%\\OpenClawProjects\\flow-system"
+  },
+  "update": {
+    "exclude_directories": [
+      "node_modules",
+      "runtime",
+      "storage",
+      "apps/platform-web/.next"
+    ],
+    "preserve_files": [
+      ".env",
+      "account-management/managed-users.json",
+      "account-management/accounts-summary.txt"
+    ]
+  }
+}

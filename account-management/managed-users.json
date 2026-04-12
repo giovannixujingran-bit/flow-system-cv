@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "accounts": [
+    {
+      "user_id": "user_01kkhaqs868ckavet3qrvj2nc6",
+      "username": "zeyang",
+      "display_name": "泽阳",
+      "role": "member",
+      "password": "zeyang",
+      "status": "active"
+    },
+    {
+      "user_id": "user_admin",
+      "username": "admin",
+      "display_name": "景然",
+      "role": "admin",
+      "password": "admin123",
+      "status": "active"
+    },
+    {
+      "user_id": "user_member01",
+      "username": "member01",
+      "display_name": "普通成员",
+      "role": "member",
+      "password": "member123",
+      "status": "active"
+    }
+  ]
+}

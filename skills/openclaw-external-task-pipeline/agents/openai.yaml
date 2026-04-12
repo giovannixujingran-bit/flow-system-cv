@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenClaw External Task Pipeline"
+  short_description: "Design and implement external task intake workflows"
+  default_prompt: "Use $openclaw-external-task-pipeline to design or implement external task intake, normalization, UI sync, and reply flows in flow-system."

@@ -1,0 +1,19 @@
+{
+  "name": "@flow-system/desktop-overlay",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "npm run build --workspace @flow-system/local-overlay-contracts && tsc -p tsconfig.json && node ./scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "electron ./dist/main.js",
+    "dev": "npm run build && npm run start"
+  },
+  "dependencies": {
+    "@flow-system/local-overlay-contracts": "0.1.1"
+  },
+  "devDependencies": {
+    "electron": "^36.3.0"
+  }
+}

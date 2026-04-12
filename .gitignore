@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.next-dev/
+dist/
+coverage/
+tmp/
+storage/
+runtime/
+*.tsbuildinfo
+*.log
+apps/local-agent/runtime/

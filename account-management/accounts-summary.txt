@@ -1,0 +1,30 @@
+﻿Flow System 账号清单
+
+说明：
+- 这些账号由平台管理员统一分发。
+- 收件人不需要自行创建管理员账号。
+- 启动本机代理时，请将 OwnerUserId 设置成对应 user_id。
+
+1. 泽阳
+   user_id: user_01kkhaqs868ckavet3qrvj2nc6
+   username: zeyang
+   password: zeyang
+   role: member
+   status: active
+
+2. 景然
+   user_id: user_admin
+   username: admin
+   password: admin123
+   role: admin
+   status: active
+
+3. 普通成员
+   user_id: user_member01
+   username: member01
+   password: member123
+   role: member
+   status: active
+
+本机代理启动示例：
+.\start-flow-agent.cmd -OwnerUserId <user_id> -UiPort 38500

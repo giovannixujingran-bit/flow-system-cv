@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flow System Overlay</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-expanded="false" data-orb-state="idle" data-active-tab="conversation">
+    <button class="orb-button" data-role="orb-button" type="button" aria-label="打开悬浮球">
+      <span class="orb-shell">
+        <svg class="orb-core" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <radialGradient id="overlayOrbFill" cx="36%" cy="32%" r="72%">
+              <stop class="orb-stop-highlight" offset="0%" />
+              <stop class="orb-stop-surface-soft" offset="42%" />
+              <stop class="orb-stop-surface" offset="100%" />
+            </radialGradient>
+            <clipPath id="overlayOrbClip">
+              <circle cx="60" cy="60" r="47" />
+            </clipPath>
+          </defs>
+          <circle class="orb-base" cx="60" cy="60" r="47" fill="url(#overlayOrbFill)" />
+          <g clip-path="url(#overlayOrbClip)">
+            <g class="orb-wireframe orb-wireframe-primary">
+              <ellipse class="orb-line orb-line-strong" cx="60" cy="60" rx="18" ry="47" />
+              <ellipse class="orb-line orb-line-soft" cx="60" cy="60" rx="34" ry="47" />
+            </g>
+            <g class="orb-wireframe orb-wireframe-secondary">
+              <ellipse class="orb-line orb-line-soft" cx="60" cy="60" rx="47" ry="20" />
+              <ellipse class="orb-line orb-line-strong" cx="60" cy="60" rx="47" ry="30" />
+            </g>
+            <path class="orb-highlight-arc orb-highlight-arc-soft" d="M36 87C48 93 69 93 83 85" />
+          </g>
+        </svg>
+        <span class="orb-orbit orb-orbit-secondary"></span>
+      </span>
+      <span class="unread-badge" data-role="unread-badge" hidden>0</span>
+    </button>
+
+    <section class="shell">
+      <header class="shell-header drag-surface no-select" data-role="drag-surface" aria-label="拖拽窗口">
+        <div class="shell-copy">
+          <div class="shell-kicker">Flow Overlay</div>
+          <h1 data-role="header-title">会话</h1>
+        </div>
+        <button class="icon-button collapse-button" data-role="collapse-button" type="button">收起</button>
+      </header>
+
+      <nav class="tabbar">
+        <button class="tab-button" data-role="tab-conversation" type="button">会话</button>
+        <button class="tab-button" data-role="tab-tasks" type="button">当前任务</button>
+      </nav>
+
+      <div class="pane" data-role="pane-conversation">
+        <section class="conversation-frame">
+          <div class="messages" data-role="messages"></div>
+          <form class="composer" data-role="composer">
+            <textarea
+              data-role="composer-input"
+              rows="3"
+              placeholder="直接输入要发给本机 OpenClaw 的内容"
+            ></textarea>
+            <button class="send-button" data-role="composer-button" type="submit">发送</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="pane" data-role="pane-tasks" hidden>
+        <div class="task-list" data-role="task-list"></div>
+      </div>
+
+      <div class="error-banner" data-role="error" hidden></div>
+    </section>
+
+    <script type="module" src="./renderer.js"></script>
+  </body>
+</html>

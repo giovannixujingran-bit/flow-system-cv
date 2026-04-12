@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l D:/猜猜这是什么/flow-system/apps/platform-api/src/*.ts D:/猜猜这是什么/flow-system/apps/local-agent/src/*.ts D:/猜猜这是什么/flow-system/packages/flow-protocol/src/*.ts)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:openclaw.ai)"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "flow-system",
+  "version": "0.1.1",
+  "private": true,
+  "packageManager": "npm@10.9.4",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run test",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "npm run db:migrate --workspace @flow-system/platform-api",
+    "db:preflight": "npm run db:preflight --workspace @flow-system/platform-api",
+    "db:import-current-state": "npm run db:import-current-state --workspace @flow-system/platform-api",
+    "db:verify-import": "npm run db:verify-import --workspace @flow-system/platform-api",
+    "db:push": "drizzle-kit push",
+    "db:seed": "npm run db:seed --workspace @flow-system/platform-api",
+    "accounts:sync": "node ./scripts/sync-managed-accounts.mjs",
+    "publish:agent-release": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/publish-agent-release.ps1",
+    "dev:api": "npm run dev --workspace @flow-system/platform-api",
+    "dev:web": "npm run dev --workspace @flow-system/platform-web",
+    "dev:agent": "npm run dev --workspace @flow-system/local-agent",
+    "start:agent": "npm run start --workspace @flow-system/local-agent",
+    "dev:overlay": "npm run dev --workspace @flow-system/desktop-overlay"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.4",
+    "drizzle-kit": "^0.31.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}

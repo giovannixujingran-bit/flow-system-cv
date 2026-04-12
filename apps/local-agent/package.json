@@ -1,0 +1,28 @@
+{
+  "name": "@flow-system/local-agent",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "npm run build --workspace @flow-system/local-overlay-contracts",
+    "dev": "tsx watch src/server.ts",
+    "prestart": "npm run build --workspace @flow-system/local-overlay-contracts",
+    "start": "tsx src/server.ts",
+    "prebuild": "npm run build --workspace @flow-system/local-overlay-contracts",
+    "build": "tsc -p tsconfig.json",
+    "pretypecheck": "npm run build --workspace @flow-system/local-overlay-contracts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@flow-system/flow-protocol": "0.1.1",
+    "@flow-system/local-openclaw-contracts": "0.1.1",
+    "@flow-system/local-overlay-contracts": "0.1.1",
+    "better-sqlite3": "^11.10.0",
+    "fastify": "^5.3.3",
+    "zod": "^3.25.56"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "tsx": "^4.19.4"
+  }
+}

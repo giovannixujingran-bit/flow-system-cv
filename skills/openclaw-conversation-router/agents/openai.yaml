@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenClaw Conversation Router"
+  short_description: "处理本机 OpenClaw 的显式会话转发请求。"
+  default_prompt: "Use $openclaw-conversation-router to interpret explicit Chinese forwarding requests and emit a single flow-system-action block."
