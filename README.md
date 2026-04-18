@@ -5,34 +5,6 @@
 
 ---
 
-## 🖼️ 界面预览
-
-### 看板 · Dashboard
-
-团队每日焦点：今日任务、项目聚焦、Agent 运行快照。
-
-![Dashboard](./docs/screenshots/01-dashboard.png)
-
-### 会话 · 任务生成
-
-多 agent 协作会话：Flow Agent 在对话中直接生成结构化任务卡（描述 / 执行者 / 子任务 / 状态）。
-
-![会话与任务生成](./docs/screenshots/02-session-task.png)
-
-### 代理 · OpenClaw 接入
-
-每台机器 Local Agent 的代理页：OpenClaw 连接状态、可执行文件 / 配置 / 认证校验、状态更新表格，并支持本机代理一键更新。
-
-![OpenClaw 接入](./docs/screenshots/03-openclaw-agent.png)
-
-### 项目时间线 · Project Journey
-
-项目关键节点可视化：成员 × 时间 × 事件，快速还原项目推进脉络。
-
-![项目时间线](./docs/screenshots/04-project-journey.png)
-
----
-
 ## 这是什么
 
 Flow System 是一个面向 [OpenClaw](https://github.com/openclaw/openclaw) 的**团队协作层**。
@@ -129,6 +101,34 @@ tests/                     # 11 个 Vitest spec（~160KB，含 platform-api 和 
 - **两种存储**：`memory` 走单文件快照（快速启动），`postgres` 走 Drizzle + 迁移工具链（生产可用）
 - **局域网部署**：支持一台机器做 shared host，其他机器的 Local Agent 连上来，同时浏览器仍通过 `127.0.0.1:<local_port>` 和本机 Agent 直接通信（跨机权限边界清晰）
 - **安装分发做到极致**：不会命令行的用户双击 `install-flow-system-from-github.cmd` 即可自动下载便携 Node + MinGit + npm ci，对外发布准备好了
+
+---
+
+## 🖼️ 界面预览
+
+### 看板 · Dashboard
+
+团队每日焦点：今日任务、项目聚焦、Agent 运行快照。
+
+![Dashboard](./docs/screenshots/01-dashboard.png)
+
+### 会话 · 任务生成
+
+多 agent 协作会话：Flow Agent 在对话中直接生成结构化任务卡（描述 / 执行者 / 子任务 / 状态）。
+
+![会话与任务生成](./docs/screenshots/02-session-task.png)
+
+### 代理 · OpenClaw 接入
+
+每台机器 Local Agent 的代理页：OpenClaw 连接状态、可执行文件 / 配置 / 认证校验、状态更新表格，并支持本机代理一键更新。
+
+![OpenClaw 接入](./docs/screenshots/03-openclaw-agent.png)
+
+### 项目时间线 · Project Journey
+
+项目关键节点可视化：成员 × 时间 × 事件，快速还原项目推进脉络。
+
+![项目时间线](./docs/screenshots/04-project-journey.png)
 
 ---
 
