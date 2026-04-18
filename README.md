@@ -21,7 +21,7 @@
 
 Flow System 是一个面向 [OpenClaw](https://github.com/openclaw/openclaw) 的**团队协作层**。
 
-解决的问题：当整个团队都在用 OpenClaw 时，怎么把"谁要做什么、做到哪一步、产出在哪里"统一管理起来？而不是每个成员各自对着自己的 OpenClaw 敲命令。
+**核心价值**：面向团队的 multi-agent 编排。每个成员的 OpenClaw 是一个独立 agent，Flow System 把它们编织成可派发任务、可同步状态、可汇总产出的协作网络。
 
 整体分三层：
 
