@@ -70,12 +70,14 @@ flowchart TB
     API <-->|注册 / 心跳 / 任务派发| A2
     A1 -.->|状态上报| DO
 
-    classDef platform fill:#e3f2fd,stroke:#1976d2
-    classDef agent fill:#fff3e0,stroke:#f57c00
-    classDef cli fill:#f3e5f5,stroke:#7b1fa2
+    classDef platform fill:#bbdefb,stroke:#1565c0,stroke-width:1.5px,color:#0d47a1
+    classDef agent fill:#ffe0b2,stroke:#ef6c00,stroke-width:1.5px,color:#e65100
+    classDef cli fill:#e1bee7,stroke:#6a1b9a,stroke-width:1.5px,color:#4a148c
+    classDef plain fill:#f5f5f5,stroke:#616161,stroke-width:1.5px,color:#212121
     class Web,API,Store platform
     class A1,A2 agent
     class OC1,OC2 cli
+    class B,DO plain
 
     style Browser fill:transparent,stroke:#888,stroke-dasharray:4 3
     style Central fill:transparent,stroke:#888,stroke-dasharray:4 3
