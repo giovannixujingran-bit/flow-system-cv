@@ -1,16 +1,121 @@
 # Flow System MVP
 
-Quick links:
+> 本地网络任务协作平台：中心化派发 + 分布式 Agent + OpenClaw 集成。
+> TypeScript monorepo · Next.js + Fastify + Drizzle · SQLite / PostgreSQL 双存储。
 
-- English distribution notes: [FLOW-SYSTEM-DISTRIBUTION.md](./FLOW-SYSTEM-DISTRIBUTION.md)
-- Chinese install guide: [INSTALL-CN.md](./INSTALL-CN.md)
+---
 
-Flow System is a local-network task handoff platform composed of:
+## 🖼️ 界面预览
 
-- `platform-web`: Next.js project dashboard and task management UI
-- `platform-api`: Fastify API for auth, files, tasks, agents, events, and risks
-- `local-agent`: Windows-first local agent with SQLite state and a local web UI
-- `flow-protocol`: shared schemas, enums, IDs, and state-machine rules
+<!-- 下列截图待补充，路径已预留 -->
+
+![Platform Web 仪表盘](./docs/screenshots/01-platform-web-dashboard.png)
+
+![本地 Agent 管理界面](./docs/screenshots/02-local-agent-ui.png)
+
+![任务派发与状态追踪](./docs/screenshots/03-task-dispatch.png)
+
+---
+
+## 这是什么
+
+Flow System 是一个围绕**本地 AI agent CLI**（项目中以代号 "OpenClaw" 引用）构建的**团队任务协作平台**。
+
+它解决的问题：当团队里每个人的电脑上都跑着一个本地 AI agent CLI 时，怎么把"谁要做什么、做到哪一步、结果在哪儿"统一管理起来？
+
+整体分三层：
+
+- **中心平台（Platform Web + API）**：统一的项目、任务、用户、事件视图，跑在一台机器上（单机或局域网共享主机）
+- **本地 Agent（每台机器一个）**：自带 SQLite 和本地 Web UI，接收平台派发的任务、调 OpenClaw 执行、把结果回传
+- **OpenClaw**：本地真正执行 AI 任务的 CLI（`openclaw.cmd` / `openclaw agent` / `openclaw gateway`）。Flow System 不关心它内部如何实现，只通过命令行协议和状态文件对接
+
+典型场景：一个内部团队需要把"用 AI 编排处理的任务"标准化为统一流水线 —— 创建任务、分配给合适的成员、追踪执行状态、收集产出物、管理访问权限 —— 而不是每个人各自为战。
+
+---
+
+## 架构
+
+```mermaid
+flowchart TB
+    subgraph Browser["用户浏览器"]
+        B[Next.js 页面]
+    end
+
+    subgraph Central["中心平台（单机或局域网共享）"]
+        Web["Platform Web<br/>Next.js · :3000"]
+        API["Platform API<br/>Fastify · :4010"]
+        Store{{"存储层<br/>memory / PostgreSQL"}}
+        Web -->|HTTP| API
+        API <--> Store
+    end
+
+    subgraph Machine1["团队成员机器 A"]
+        A1["Local Agent<br/>SQLite + 本地 UI :38500"]
+        OC1["OpenClaw CLI"]
+        A1 -->|子进程| OC1
+    end
+
+    subgraph Machine2["团队成员机器 B"]
+        A2["Local Agent<br/>SQLite + 本地 UI :38501"]
+        OC2["OpenClaw CLI"]
+        A2 -->|子进程| OC2
+    end
+
+    subgraph Overlay["桌面层（可选）"]
+        DO["Desktop Overlay"]
+    end
+
+    B --> Web
+    API <-->|注册 / 心跳 / 任务派发| A1
+    API <-->|注册 / 心跳 / 任务派发| A2
+    A1 -.->|状态上报| DO
+
+    classDef platform fill:#e3f2fd,stroke:#1976d2
+    classDef agent fill:#fff3e0,stroke:#f57c00
+    classDef cli fill:#f3e5f5,stroke:#7b1fa2
+    class Web,API,Store platform
+    class A1,A2 agent
+    class OC1,OC2 cli
+```
+
+### 代码结构
+
+```text
+apps/
+  platform-web/            # Next.js 仪表盘，项目/任务/用户/会话管理 UI
+  platform-api/            # Fastify API，认证/文件/任务/agent/事件/风险
+  local-agent/             # 本机常驻进程，自带 HTTP 服务和本地 UI
+  desktop-overlay/         # 桌面叠加层（进度/通知）
+  desktop-overlay-native/  # 原生 Windows 实现
+
+packages/
+  flow-protocol/           # 共享 schema、enum、ID 生成、状态机
+  local-openclaw-contracts/# Local Agent ↔ OpenClaw 的跨进程契约
+  local-overlay-contracts/ # Local Agent ↔ Desktop Overlay 的契约
+
+scripts/                   # 19 个 PowerShell/Node 脚本：install / update / package / publish
+account-management/        # managed 模式下的账号清单
+tests/                     # 11 个 Vitest spec（~160KB，含 platform-api 和 local-agent 集成测试）
+```
+
+### 关键设计点
+
+- **契约分层**：`flow-protocol` 包集中管理跨进程的枚举、schema、状态机，避免 3 个 TypeScript app 各自维护一套类型
+- **三种 seed 模式**：`managed`（发行分发）/ `empty`（自助初始化）/ `demo`（本地演示）—— 对应不同的部署形态
+- **两种存储**：`memory` 走单文件快照（快速启动），`postgres` 走 Drizzle + 迁移工具链（生产可用）
+- **局域网部署**：支持一台机器做 shared host，其他机器的 Local Agent 连上来，同时浏览器仍通过 `127.0.0.1:<local_port>` 和本机 Agent 直接通信（跨机权限边界清晰）
+- **安装分发做到极致**：不会命令行的用户双击 `install-flow-system-from-github.cmd` 即可自动下载便携 Node + MinGit + npm ci，对外发布准备好了
+
+---
+
+## Quick links
+
+- 分发与发行说明：[FLOW-SYSTEM-DISTRIBUTION.md](./FLOW-SYSTEM-DISTRIBUTION.md)
+- 中文安装向导：[INSTALL-CN.md](./INSTALL-CN.md)
+- 桌面层设计：[docs/desktop-overlay-mvp.md](./docs/desktop-overlay-mvp.md)
+- PostgreSQL 迁移方案：[docs/platform-api-postgres-cutover.md](./docs/platform-api-postgres-cutover.md)
+
+---
 
 ## Windows native startup
 
@@ -164,3 +269,9 @@ Shared-host PostgreSQL startup example:
 ```powershell
 .\start-flow-system.cmd -StorageMode postgres -DatabaseUrl "postgres://postgres:postgres@127.0.0.1:5432/flow_system" -RunMigrations:$true -ImportCurrentState:$true
 ```
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
