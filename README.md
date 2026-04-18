@@ -19,17 +19,15 @@
 
 ## 这是什么
 
-Flow System 是一个面向 [**OpenClaw**](https://github.com/openclaw/openclaw) 🦞 的**团队协作层**。
+Flow System 是一个面向 [OpenClaw](https://github.com/openclaw/openclaw) 的**团队协作层**。
 
-[OpenClaw](https://github.com/openclaw/openclaw) 是一个开源的个人 AI 助理（GitHub 36 万+ star），每个用户在自己的设备上本地运行一个 Gateway + Agent 架构的实例，可接入 WhatsApp / Telegram / Slack 等消息渠道和多家 AI 模型（OpenAI / Anthropic / 等）。它本身是**单机工具**。
-
-Flow System 解决的问题：当整个团队都在用 OpenClaw 时，怎么把"谁要做什么、做到哪一步、产出在哪里"统一管理起来？而不是每个成员各自对着自己的 OpenClaw 敲命令。
+解决的问题：当整个团队都在用 OpenClaw 时，怎么把"谁要做什么、做到哪一步、产出在哪里"统一管理起来？而不是每个成员各自对着自己的 OpenClaw 敲命令。
 
 整体分三层：
 
 - **中心平台（Platform Web + API）**：统一的项目、任务、用户、事件视图，跑在一台机器上（单机或局域网共享主机）
 - **本地 Agent（每台机器一个）**：自带 SQLite 和本地 Web UI，接收平台派发的任务、调本机 OpenClaw 执行、把结果回传
-- **OpenClaw**：每台机器本地的 AI 助理。Flow System 通过 OpenClaw CLI（`openclaw gateway` / `openclaw agent`）和状态文件与之对接，不侵入其内部
+- **OpenClaw 对接层**：通过 OpenClaw CLI（`openclaw gateway` / `openclaw agent`）和状态文件与本机 OpenClaw 通信，不侵入其内部
 
 典型场景：一个内部团队需要把"用 AI 编排处理的任务"标准化为统一流水线 —— 创建任务、分配给合适的成员、追踪执行状态、收集产出物、管理访问权限。
 
