@@ -7,13 +7,29 @@
 
 ## 🖼️ 界面预览
 
-<!-- 下列截图待补充，路径已预留 -->
+### 看板 · Dashboard
 
-![Platform Web 仪表盘](./docs/screenshots/01-platform-web-dashboard.png)
+团队每日焦点：今日任务、项目聚焦、Agent 运行快照。
 
-![本地 Agent 管理界面](./docs/screenshots/02-local-agent-ui.png)
+![Dashboard](./docs/screenshots/01-dashboard.png)
 
-![任务派发与状态追踪](./docs/screenshots/03-task-dispatch.png)
+### 会话 · 任务生成
+
+多 agent 协作会话：Flow Agent 在对话中直接生成结构化任务卡（描述 / 执行者 / 子任务 / 状态）。
+
+![会话与任务生成](./docs/screenshots/02-session-task.png)
+
+### 代理 · OpenClaw 接入
+
+每台机器 Local Agent 的代理页：OpenClaw 连接状态、可执行文件 / 配置 / 认证校验、状态更新表格，并支持本机代理一键更新。
+
+![OpenClaw 接入](./docs/screenshots/03-openclaw-agent.png)
+
+### 项目时间线 · Project Journey
+
+项目关键节点可视化：成员 × 时间 × 事件，快速还原项目推进脉络。
+
+![项目时间线](./docs/screenshots/04-project-journey.png)
 
 ---
 
